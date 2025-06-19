@@ -17,6 +17,7 @@ export enum AuthType {
   FORGOT_PASSWORD = "forgot-password",
   RESET_PASSWORD = "reset-password",
   VERIFY_EMAIL = "verify-email",
+  LINK_ACCOUNT = "link-account",
 }
 
 

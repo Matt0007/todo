@@ -27,14 +27,25 @@ import { useRegister } from "@/lib/hooks/auth/register";
 import { Loader2 } from "lucide-react";
 import { AuthType, LoginData, RegisterData } from "@/lib/types/auth";
 import { useLogin } from "@/lib/hooks/auth/login";
+import LinkAccount from "@/components/pages/auth/link-account";
 
 export default function AuthPage() {
   const { type } = useParams();
   const form = useForm();
 
+  const { register, registerLoading, registerError } = useRegister();
+  const { login, loginLoading, loginError } = useLogin();
+  const loading = registerLoading || loginLoading;
+  const error = registerError || loginError;
+
   const isLogin = type === AuthType.LOGIN;
   const isRegister = type === AuthType.REGISTER;
   const isForgotPassword = type === AuthType.FORGOT_PASSWORD;
+  const isLinkAccount = type === AuthType.LINK_ACCOUNT;
+
+  if (isLinkAccount) {
+    return <LinkAccount />;
+  }
 
   const title = isLogin
     ? AUTH_TITLE.LOGIN
@@ -75,12 +86,6 @@ export default function AuthPage() {
     : isForgotPassword
     ? AUTH_BUTTON_TEXT.FORGOT_PASSWORD
     : "";
-
-    const { register, registerLoading, registerError } =
-      useRegister();
-      const { login, loginLoading, loginError } = useLogin();
-  const loading = registerLoading || loginLoading ;
-  const error = registerError || loginError ;
 
   const handleSubmit = form.handleSubmit((data) => {
     if (isRegister) {
@@ -144,12 +149,12 @@ export default function AuthPage() {
                       />
                       <div className="space-y-1 leading-snug">
                         <p>
-                          J’accepte les{" "}
+                          J&apos;accepte les{" "}
                           <Link
                             href="/cgu"
                             className="underline hover:text-primary transition-colors"
                           >
-                            conditions d’utilisation
+                            conditions d&apos;utilisation
                           </Link>{" "}
                           et la{" "}
                           <Link
@@ -162,7 +167,7 @@ export default function AuthPage() {
                         <div className="flex items-center justify-center me-5">
                           {form.formState.errors.terms && (
                             <p className="text-sm text-destructive text-center">
-                              Merci d’accepter les conditions.
+                              Merci d&apos;accepter les conditions.
                             </p>
                           )}
                         </div>
