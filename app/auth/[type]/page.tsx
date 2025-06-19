@@ -28,6 +28,7 @@ import { Loader2 } from "lucide-react";
 import { AuthType, LoginData, RegisterData } from "@/lib/types/auth";
 import { useLogin } from "@/lib/hooks/auth/login";
 import LinkAccount from "@/components/pages/auth/link-account";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function AuthPage() {
   const { type } = useParams();
@@ -177,11 +178,16 @@ export default function AuthPage() {
                 />
               )}
               <div className="flex items-center justify-center ">
-                {error && (
-                  <p className="text-sm text-destructive text-center">
-                    {error}
-                  </p>
-                )}
+            {error && (
+              <Alert
+                variant="destructive"
+                className="flex flex-col items-center justify-center"
+              >
+                <AlertDescription className="text-center">
+                  {error}
+                </AlertDescription>
+              </Alert>
+            )}
               </div>
               {isLogin && (
                 <div className="text-sm text-center ">
