@@ -1,6 +1,7 @@
 import { ThemeProvider } from "next-themes";
 import "./styles/globals.css";
 import { Header } from "@/components/layout/header";
+import { Toaster } from "react-hot-toast";
 
 
 export default function RootLayout({
@@ -17,6 +18,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster />
           <Header />
           {children}
         </ThemeProvider>

@@ -1,3 +1,6 @@
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
@@ -10,6 +13,7 @@ model User {
   name          String?
   email         String    @unique
   emailVerified DateTime?
+  password      String?   // uniquement si login via formulaire
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -65,13 +69,14 @@ model VerificationToken {
   @@map("verificationtokens")
 }
 
-// 📝 NOS MODÈLES MÉTIER (inchangés)
+// 📝 NOS MODÈLES MÉTIER
 model Todo {
   id          String    @id @default(cuid())
   title       String
   description String?
   completed   Boolean   @default(false)
   priority    Priority  @default(NORMAL)
+  type        TodoType  @default(PERSONAL) // 🆕 ENUM POUR UPGRADE
   
   categoryId  String?
   category    Category? @relation(fields: [categoryId], references: [id])
@@ -87,20 +92,32 @@ model Todo {
 }
 
 model Category {
-  id        String   @id @default(cuid())
+  id        String       @id @default(cuid())
   name      String
-  color     String   // Obligatoire !
+  color     String       // Obligatoire !
   emoji     String?
+  type      CategoryType @default(PERSONAL) // 🆕 ENUM POUR UPGRADE
   
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   todos     Todo[]
   
-  createdAt DateTime @default(now())
+  createdAt DateTime     @default(now())
   
   @@unique([userId, name])
   @@map("categories")
+}
+
+// 🎯 ENUMS POUR UPGRADE FUTUR
+enum TodoType {
+  PERSONAL  // 📝 Todo personnel (actuel)
+  SHARED    // 👥 Todo partagé (futur)
+}
+
+enum CategoryType {
+  PERSONAL  // 🎨 Catégorie personnelle (actuel)  
+  SHARED    // 👥 Catégorie partagée (futur)
 }
 
 enum Priority {
@@ -108,4 +125,3 @@ enum Priority {
   NORMAL
   HIGH
 }
-

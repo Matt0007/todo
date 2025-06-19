@@ -1,4 +1,4 @@
-import {  User } from "lucide-react"
+import {  LogIn} from "lucide-react"
 
 export const NAV_LINKS = [
     {
@@ -9,8 +9,8 @@ export const NAV_LINKS = [
 
 export const ICONS_NAV = [
     {
-        label: "Home",
-        href: "/",
-        icon: <User />
+        label: "Connexion",
+        href: "/auth/login",
+        icon: <LogIn />
     },
 ]

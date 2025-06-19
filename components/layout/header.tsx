@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { Menu } from "lucide-react";
-import { ICONS_NAV, NAV_LINKS } from "@/constants/layout/header";
+import { ICONS_NAV, NAV_LINKS } from "@/lib/constants/layout/header";
 
 
 
