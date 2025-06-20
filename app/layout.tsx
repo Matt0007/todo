@@ -5,7 +5,7 @@ import "./styles/globals.css";
 import { Header } from "@/components/layout/header";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
-
+import { Footer } from "@/components/layout/footer";
 
 export default function RootLayout({
   children,
@@ -27,6 +27,7 @@ export default function RootLayout({
             {children}
           </ThemeProvider>
         </SessionProvider>
+        <Footer />
       </body>
     </html>
   );

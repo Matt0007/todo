@@ -29,7 +29,12 @@ export const getIconsNav = (session: Session | null) => {
 
 export const NAV_LINKS = [
   {
-    label: "Home",
+    label: "Todo",
     href: "/",
   },
+  {
+    label: "Weekboard",
+    href: "/weekboard",
+  },
+  
 ];
